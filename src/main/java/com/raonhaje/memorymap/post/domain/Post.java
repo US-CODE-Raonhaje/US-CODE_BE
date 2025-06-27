@@ -34,6 +34,9 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private Double Longitude;
 
+    @Column(nullable = false)
+    private String address;
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Like> likes;
 
