@@ -21,6 +21,9 @@ public class Member extends BaseEntity {
     private String oauthId;
 
     @Column(nullable = false)
+    private String imageUrl;
+
+    @Column(nullable = false, unique = true)
     private String nickname;
 
     @Column(nullable = false)
@@ -34,7 +37,8 @@ public class Member extends BaseEntity {
                 .build();
     }
 
-    public void updateNickname(String nickname) {
+    public void updateMember(String nickname, String imageUrl) {
         this.nickname = nickname;
+        this.imageUrl = imageUrl;
     }
 }
