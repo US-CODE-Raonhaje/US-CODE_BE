@@ -41,6 +41,11 @@ jobs:
         run: |
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} --region ${{ secrets.GKE_REGION }} --project ${{ secrets.GCP_PROJECT }}
 
+      - name: gke-gcloud-auth-plugin 설치
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
+
       - name: 쿠버네티스 배포
         run: |
           kubectl set image deployment/memory-map memory-map=${{ secrets.GKE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REPO }}/memory-map:${{ github.sha }}
