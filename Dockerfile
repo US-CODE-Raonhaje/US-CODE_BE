@@ -2,11 +2,11 @@
 FROM gradle:8.7.0-jdk21 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN gradle build -x test
+RUN ./gradlew build -x test
 
 # 실행 단계
 FROM eclipse-temurin:21-jre
-ARG JAR_FILE=build/libs/*.jar
-COPY --from=build /home/gradle/src/${JAR_FILE} app.jar
+WORKDIR /app
+COPY --from=build /home/gradle/src/build/libs/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
