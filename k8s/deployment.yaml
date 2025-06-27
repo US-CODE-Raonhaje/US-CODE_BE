@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-map
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-map
+  template:
+    metadata:
+      labels:
+        app: memory-map
+    spec:
+      containers:
+        - name: memory-map
+          image: ${IMAGE_URL}
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memory-map
+spec:
+  selector:
+    app: memory-map
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP

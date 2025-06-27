@@ -45,10 +45,13 @@ jobs:
         run: |
           gcloud components install gke-gcloud-auth-plugin --quiet
 
-      - name: Deployment 리소스 적용
+      - name: Deployment 리소스 적용 (envsubst로 이미지 URL 치환)
+        env:
+          IMAGE_URL: ${{ secrets.GKE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REPO }}/memory-map:${{ github.sha }}
         run: |
-          kubectl apply -f k8s/deployment.yaml
+          sudo apt-get update && sudo apt-get install -y gettext
+          envsubst < k8s/deployment.yaml | kubectl apply -f -
 
-      - name: 쿠버네티스 배포
+      - name: 쿠버네티스 배포(롤링 업데이트)
         run: |
-          kubectl set image deployment/memory-map memory-map=${{ secrets.GKE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REPO }}/memory-map:${{ github.sha }}
+          kubectl rollout status deployment/memory-map
