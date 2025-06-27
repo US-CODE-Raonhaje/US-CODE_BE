@@ -26,9 +26,11 @@ public class Picture {
     private String imageUrl;
 
     public static Picture create(Post post, String imageUrl) {
-        return Picture.builder()
+        Picture picture = Picture.builder()
                 .post(post)
                 .imageUrl(imageUrl)
                 .build();
+        post.setPicture(picture);
+        return picture;
     }
 }
