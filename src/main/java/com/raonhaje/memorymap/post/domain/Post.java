@@ -50,6 +50,11 @@ public class Post extends BaseEntity {
         this.content = content;
     }
 
+    public void setMember(Member member) {
+        this.member = member;
+        member.getPosts().add(this);
+    }
+
     public void setPicture(Picture picture) {
         this.picture = picture;
     }
