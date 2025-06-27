@@ -6,6 +6,7 @@ import com.raonhaje.memorymap.member.dto.MemberRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController implements AuthApiDocs {
 
     @Override
-    public ResponseEntity<TokenResponse> kakaoLogin(String code) {
+    public ResponseEntity<TokenResponse> kakaoLogin(@RequestParam("code") String code) {
         return ResponseEntity.ok(new TokenResponse("mock accessToken", "mock refreshToken", true));
     }
 

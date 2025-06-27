@@ -17,7 +17,7 @@ class LikeTest {
         Post post = Post.create("Test Title", "Test Content");
 
         // when
-        Like like = Like.create(member, post);
+        Likes like = Likes.create(member, post);
 
         // then
         assertEquals(member, like.getMember());
