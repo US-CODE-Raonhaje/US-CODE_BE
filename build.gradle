@@ -28,10 +28,15 @@ dependencies {
 
     // Lombok
     implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
     // Database
     runtimeOnly 'com.mysql:mysql-connector-j'
 //    runtimeOnly 'com.h2database:h2'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.7.0'
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
