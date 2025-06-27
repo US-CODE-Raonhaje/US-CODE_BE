@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder(access = AccessLevel.PRIVATE)
-public class Like extends BaseEntity {
+public class Likes extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +28,8 @@ public class Like extends BaseEntity {
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
-    public static Like create(Member member, Post post) {
-        return Like.builder()
+    public static Likes create(Member member, Post post) {
+        return Likes.builder()
                 .member(member)
                 .post(post)
                 .build();

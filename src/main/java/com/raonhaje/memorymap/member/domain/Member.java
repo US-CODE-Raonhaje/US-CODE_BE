@@ -1,7 +1,7 @@
 package com.raonhaje.memorymap.member.domain;
 
 import com.raonhaje.memorymap.common.domain.BaseEntity;
-import com.raonhaje.memorymap.like.domain.Like;
+import com.raonhaje.memorymap.like.domain.Likes;
 import com.raonhaje.memorymap.post.domain.Post;
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,7 +35,7 @@ public class Member extends BaseEntity {
     private Integer age;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes;
+    private List<Likes> likes;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
