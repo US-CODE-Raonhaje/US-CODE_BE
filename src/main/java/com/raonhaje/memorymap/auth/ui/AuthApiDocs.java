@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Tag(name = "회원 인증", description = "회원 인증 관련 API 문서입니다.")
 public interface AuthApiDocs {
@@ -24,7 +25,7 @@ public interface AuthApiDocs {
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
     @PostMapping("/kakao")
-    ResponseEntity<TokenResponse> kakaoLogin(@RequestBody KakaoLoginRequest request);
+    ResponseEntity<TokenResponse> kakaoLogin(@RequestParam("code") String code);
 
     @Operation(summary = "회원 추가 정보 입력 후 회원가입", description = "회원의 추가 정보를 입력한 후, 회원가입합니다.")
     @ApiResponses({
