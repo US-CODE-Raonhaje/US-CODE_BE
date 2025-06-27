@@ -17,6 +17,13 @@ spec:
           image: ${IMAGE_URL}
           ports:
             - containerPort: 8080
+          env:
+            - name: DB_URL
+              value: "${DB_URL}"
+            - name: DB_USERNAME
+              value: "${DB_USERNAME}"
+            - name: DB_PASSWORD
+              value: "${DB_PASSWORD}"
 ---
 apiVersion: v1
 kind: Service
