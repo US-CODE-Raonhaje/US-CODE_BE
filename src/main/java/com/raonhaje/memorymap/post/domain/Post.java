@@ -1,7 +1,7 @@
 package com.raonhaje.memorymap.post.domain;
 
 import com.raonhaje.memorymap.common.domain.BaseEntity;
-import com.raonhaje.memorymap.like.domain.Like;
+import com.raonhaje.memorymap.like.domain.Likes;
 import com.raonhaje.memorymap.member.domain.Member;
 import com.raonhaje.memorymap.picture.domain.Picture;
 import jakarta.persistence.*;
@@ -38,7 +38,7 @@ public class Post extends BaseEntity {
     private String address;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes;
+    private List<Likes> likes;
 
     @OneToOne(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Picture picture;
