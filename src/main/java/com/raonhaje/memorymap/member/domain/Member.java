@@ -40,7 +40,7 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
-    public static Member create(String oauthId, String nickname, Integer age ) {
+    public static Member create(String oauthId, String nickname, Integer age) {
         return Member.builder()
                 .oauthId(oauthId)
                 .nickname(nickname)
