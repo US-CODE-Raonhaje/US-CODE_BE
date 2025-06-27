@@ -47,7 +47,7 @@ jobs:
 
       - name: Deployment 리소스 적용
         run: |
-          kubectl apply -f deployment.yaml
+          kubectl apply -f k8s/deployment.yaml
 
       - name: 쿠버네티스 배포
         run: |
