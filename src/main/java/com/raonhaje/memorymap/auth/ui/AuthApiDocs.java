@@ -2,10 +2,8 @@ package com.raonhaje.memorymap.auth.ui;
 
 import com.raonhaje.memorymap.auth.dto.KakaoLoginRequest;
 import com.raonhaje.memorymap.auth.dto.TokenReissueRequest;
-import com.raonhaje.memorymap.auth.dto.TokenRequest;
 import com.raonhaje.memorymap.auth.dto.TokenResponse;
 import com.raonhaje.memorymap.member.dto.MemberRequest;
-import com.raonhaje.memorymap.member.dto.MemberResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,10 +29,10 @@ public interface AuthApiDocs {
     @Operation(summary = "회원 추가 정보 입력 후 회원가입", description = "회원의 추가 정보를 입력한 후, 회원가입합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(schema = @Schema(implementation = MemberResponse.class)))
+                    content = @Content(schema = @Schema(implementation = Long.class)))
     })
     @PostMapping("/signup")
-    ResponseEntity<MemberResponse> signUp(@RequestBody MemberRequest request);
+    ResponseEntity<Long> signUp(@RequestBody MemberRequest request);
 
     @Operation(summary = "액세스 토큰 재발급", description = "액세스 토큰을 재발급합니다.")
     @ApiResponses({
