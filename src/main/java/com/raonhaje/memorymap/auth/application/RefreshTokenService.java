@@ -1,7 +1,7 @@
 package com.raonhaje.memorymap.auth.application;
 
 import com.raonhaje.memorymap.auth.domain.RefreshToken;
-import com.raonhaje.memorymap.auth.repository.RefreshTokenRepository;
+import com.raonhaje.memorymap.auth.repository.RefreshTokenJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RefreshTokenService {
 
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final RefreshTokenJpaRepository refreshTokenRepository;
 
     public RefreshToken findById(Long memberId) {
         return refreshTokenRepository.findById(memberId)

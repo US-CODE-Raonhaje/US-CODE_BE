@@ -41,6 +41,9 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Location location;
+
     private boolean additionalInfoRequired = true;
 
     public static Member create(Long kakaoId, String nickname, Integer age) {

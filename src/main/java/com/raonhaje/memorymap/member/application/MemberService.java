@@ -1,7 +1,6 @@
 package com.raonhaje.memorymap.member.application;
 
 import com.raonhaje.memorymap.auth.dto.KakaoUserInfo;
-import com.raonhaje.memorymap.auth.repository.RefreshTokenRepository;
 import com.raonhaje.memorymap.common.exception.BusinessException;
 import com.raonhaje.memorymap.common.exception.ErrorCode;
 import com.raonhaje.memorymap.member.domain.Member;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberJpaRepository memberJpaRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
 
     public Member findOrCreateMember(KakaoUserInfo kakaoUserInfo) {
         return memberJpaRepository.findByKakaoId(kakaoUserInfo.id())
