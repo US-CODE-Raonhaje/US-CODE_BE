@@ -11,15 +11,15 @@ class MemberTest {
     @DisplayName("Member 생성 테스트")
     void createMemberTest() {
         // given
-        String oauthId = "testOauthId";
+        Long kakaoId = 1234L;
         String nickname = "testNickname";
         Integer age = 25;
 
         // when
-        Member member = Member.create(oauthId, nickname, age);
+        Member member = Member.create(kakaoId, nickname, age);
 
         // then
-        assertEquals("testOauthId", member.getOauthId());
+        assertEquals(kakaoId, member.getKakaoId());
         assertEquals("testNickname", member.getNickname());
         assertEquals(25, member.getAge());
     }
@@ -28,7 +28,7 @@ class MemberTest {
     @DisplayName("Member 업데이트 테스트")
     void updateMemberTest() {
         // given
-        Member member = Member.create("testOauthId", "testNickname", 25);
+        Member member = Member.create(1234L, "testNickname", 25);
         String newNickname = "updatedNickname";
         String newImageUrl = "http://example.com/image.jpg";
 

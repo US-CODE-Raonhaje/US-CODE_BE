@@ -1,5 +1,6 @@
 package com.raonhaje.memorymap.member.domain;
 
+import com.raonhaje.memorymap.auth.dto.KakaoUserInfo;
 import com.raonhaje.memorymap.common.domain.BaseEntity;
 import com.raonhaje.memorymap.like.domain.Likes;
 import com.raonhaje.memorymap.post.domain.Post;
@@ -23,7 +24,7 @@ public class Member extends BaseEntity {
     private Long memberId;
 
     @Column(nullable = false, unique = true)
-    private String oauthId;
+    private Long kakaoId;
 
     @Column(nullable = false)
     private String imageUrl;
@@ -40,12 +41,21 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
-    public static Member create(String oauthId, String nickname, Integer age) {
+    private boolean additionalInfoRequired = true;
+
+    public static Member create(Long kakaoId, String nickname, Integer age) {
         return Member.builder()
-                .oauthId(oauthId)
+                .kakaoId(kakaoId)
                 .nickname(nickname)
                 .age(age)
                 .build();
+    }
+
+    public static Member createFromKakao(KakaoUserInfo kakaoUserInfo) {
+        Member member = new Member();
+        member.kakaoId = kakaoUserInfo.id();
+        member.additionalInfoRequired = true; // 최초 가입 시 추가 정보 필요
+        return member;
     }
 
     public void updateMember(String nickname, String imageUrl) {
