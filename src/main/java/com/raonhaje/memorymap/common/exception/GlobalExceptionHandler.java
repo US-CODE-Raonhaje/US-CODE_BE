@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgument(HttpServletRequest request, Exception ex) {
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(HttpServletRequest request, IllegalArgumentException ex) {
         log.warn("IllegalArgumentException: {}", ex.getMessage());
         ErrorResponse error = ErrorResponse.of(ErrorCode.INVALID_INPUT_VALUE, request.getRequestURI());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
