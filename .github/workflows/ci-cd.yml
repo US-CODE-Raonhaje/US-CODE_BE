@@ -37,11 +37,19 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
           docker build \
             --build-arg DB_URL=$DB_URL \
             --build-arg DB_USERNAME=$DB_USERNAME \
             --build-arg DB_PASSWORD=$DB_PASSWORD \
+            --build-arg CLIENT_ID=$CLIENT_ID \
+            --build-arg CLIENT_SECRET=$CLIENT_SECRET \
+            --build-arg REDIRECT_URI=$REDIRECT_URI \
+            --build-arg JWT_SECRET=$JWT_SECRET \
             -t ${{ secrets.GKE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REPO }}/memory-map:${{ github.sha }} .
           docker push ${{ secrets.GKE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REPO }}/memory-map:${{ github.sha }}
 
@@ -53,12 +61,16 @@ jobs:
         run: |
           gcloud components install gke-gcloud-auth-plugin --quiet
 
-      - name: Deployment 리소스 적용 (envsubst로 이미지 URL 치환)
+      - name: Deployment 리소스 적용 (envsubst로 이미지 URL 및 환경변수 치환)
         env:
           IMAGE_URL: ${{ secrets.GKE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REPO }}/memory-map:${{ github.sha }}
           DB_URL: ${{ secrets.DB_URL }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
           sudo apt-get update && sudo apt-get install -y gettext
           envsubst < k8s/deployment.yaml | kubectl apply -f -
