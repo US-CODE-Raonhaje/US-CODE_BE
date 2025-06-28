@@ -1,6 +1,6 @@
 package com.raonhaje.memorymap.auth.ui;
 
-import com.raonhaje.memorymap.auth.dto.KakaoLoginRequest;
+import com.raonhaje.memorymap.auth.dto.ReIssueAccessTokenResponse;
 import com.raonhaje.memorymap.auth.dto.TokenReissueRequest;
 import com.raonhaje.memorymap.auth.dto.TokenResponse;
 import com.raonhaje.memorymap.member.dto.MemberRequest;
@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Tag(name = "회원 인증", description = "회원 인증 관련 API 문서입니다.")
@@ -33,16 +34,16 @@ public interface AuthApiDocs {
                     content = @Content(schema = @Schema(implementation = Long.class)))
     })
     @PostMapping("/signup")
-    ResponseEntity<Long> signUp(@RequestBody MemberRequest request);
+    ResponseEntity<Long> signUp(@RequestHeader("Authorization") String authorizationHeader, @RequestBody MemberRequest request);
 
     @Operation(summary = "액세스 토큰 재발급", description = "액세스 토큰을 재발급합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(schema = @Schema(implementation = TokenResponse.class))),
+                    content = @Content(schema = @Schema(implementation = ReIssueAccessTokenResponse.class))),
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
     @PostMapping("/reissue")
-    ResponseEntity<TokenResponse> reissueAccessToken(@RequestBody TokenReissueRequest tokenRequest);
+    ResponseEntity<ReIssueAccessTokenResponse> reissueAccessToken(@RequestHeader("refresh") String refreshToken);
 
     @Operation(summary = "로그아웃 및 리프레시 토큰 삭제", description = "로그아웃을 수행하고 리프레시 토큰을 삭제합니다.")
     @ApiResponses({
@@ -50,5 +51,5 @@ public interface AuthApiDocs {
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
     @PostMapping("/logout")
-    ResponseEntity<Void> logout();
+    ResponseEntity<Void> logout(@RequestHeader("Authorization") String authorizationHeader);
 }
