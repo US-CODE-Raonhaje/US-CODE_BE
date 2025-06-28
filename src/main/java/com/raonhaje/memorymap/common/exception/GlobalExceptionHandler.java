@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(HttpServletRequest request, MethodArgumentNotValidException ex) {
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(HttpServletRequest request, MethodArgumentNotValidException ex) {
         String message = "유효성 검사에 실패하였습니다.";
         if (!ex.getBindingResult().getFieldErrors().isEmpty()) {
             message = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
@@ -58,21 +58,21 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> handleMediaTypeNotSupported(HttpServletRequest request, HttpMediaTypeNotSupportedException ex) {
+    public ResponseEntity<ErrorResponse> handleMediaTypeNotSupportedException(HttpServletRequest request, HttpMediaTypeNotSupportedException ex) {
         log.warn("HttpMediaTypeNotSupportedException: {}", ex.getMessage());
         ErrorResponse error = ErrorResponse.of(ErrorCode.UNSUPPORTED_MEDIA_TYPE, request.getRequestURI());
         return new ResponseEntity<>(error, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> handleMethodNotSupported(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
+    public ResponseEntity<ErrorResponse> handleMethodNotSupportedException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
         log.warn("HttpRequestMethodNotSupportedException: {}", ex.getMessage());
         ErrorResponse error = ErrorResponse.of(ErrorCode.METHOD_NOT_ALLOWED, request.getRequestURI());
         return new ResponseEntity<>(error, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgument(HttpServletRequest request, IllegalArgumentException ex) {
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(HttpServletRequest request, IllegalArgumentException ex) {
         log.warn("IllegalArgumentException: {}", ex.getMessage());
         ErrorResponse error = ErrorResponse.of(ErrorCode.INVALID_INPUT_VALUE, request.getRequestURI());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
