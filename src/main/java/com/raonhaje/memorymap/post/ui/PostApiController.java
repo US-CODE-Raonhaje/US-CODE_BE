@@ -32,15 +32,15 @@ public class PostApiController implements PostApiDocs {
 
     @Override
     public ResponseEntity<PostResponse> getPost(Long id) {
-        return ResponseEntity.ok(new PostResponse("Mock Title", "Mock Content", "mock Address"));
+        return ResponseEntity.ok(new PostResponse("Mock Title", "Mock Content", "mock Address", "mock category"));
     }
 
     @Override
     public ResponseEntity<PostListResponse> getPostsByMember(Long memberId) {
         return ResponseEntity.ok(
                 new PostListResponse(
-                        List.of(new PostResponse("Mock Title 1", "Mock Content 1", "mock Address 1"),
-                                new PostResponse("Mock Title 2", "Mock Content 2", "mock Address 2")),
+                        List.of(new PostResponse("Mock Title 1", "Mock Content 1", "mock Address 1", "mock category 1"),
+                                new PostResponse("Mock Title 2", "Mock Content 2", "mock Address 2", "mock category 2")),
                         2
                 )
         );
