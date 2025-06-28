@@ -33,9 +33,9 @@ spec:
             - name: JWT_SECRET
               value: "${JWT_SECRET}"
             - name: ACCESS_TOKEN_EXPIRATION_MS
-              value: "${ACCESS_TOKEN_EXPIRATION_MS}"
+              value: "3600000"
             - name: REFRESH_TOKEN_EXPIRATION_MS
-              value: "${REFRESH_TOKEN_EXPIRATION_MS}"
+              value: "1209600000"
 ---
 apiVersion: v1
 kind: Service
