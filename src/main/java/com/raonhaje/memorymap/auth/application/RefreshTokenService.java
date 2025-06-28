@@ -11,21 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RefreshTokenService {
 
-    private final RefreshTokenJpaRepository refreshTokenRepository;
-
-    public RefreshToken findById(Long memberId) {
-        return refreshTokenRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("Refresh token not found for member ID: " + memberId));
-    }
-
-    public void save(RefreshToken refreshToken) {
-        refreshTokenRepository.save(refreshToken);
-    }
+    private final RefreshTokenJpaRepository refreshTokenJpaRepository;
 
     @Transactional
-    public void deleteRefreshToken(Long kakaoId) {
-        refreshTokenRepository.findById(kakaoId)
-                .ifPresent(refreshTokenRepository::delete);
+    public RefreshToken saveOrUpdate(Long memberId, String refreshTokenValue) {
+        return refreshTokenJpaRepository.findByMemberId(memberId)
+                .map(token -> {
+                    token.updateRefreshToken(refreshTokenValue);
+                    return token;
+                })
+                .orElseGet(() -> refreshTokenJpaRepository.save(new RefreshToken(refreshTokenValue, memberId)));
     }
-
 }
