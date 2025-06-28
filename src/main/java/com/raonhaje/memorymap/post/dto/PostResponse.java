@@ -16,7 +16,7 @@ public record PostResponse(
                 post.getContent(),
                 post.getAddress(),
                 post.getCategory().getName(),
-                post.getImageUrl()
+                post.getPicture().getImageUrl()
         );
     }
 }
