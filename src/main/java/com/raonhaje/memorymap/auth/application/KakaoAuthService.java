@@ -19,13 +19,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class KakaoAuthService {
 
-    @Value("${kakao.client-id}")
+    @Value("${CLIENT_ID}")
     private String clientId;
 
-    @Value("${kakao.client-secret:}")
+    @Value("${CLIENT_SECRET}")
     private String clientSecret;
 
-    @Value("${kakao.redirect-uri}")
+    @Value("${REDIRECT_URI}")
     private String redirectUri;
 
     private final RestTemplate restTemplate = new RestTemplate();
