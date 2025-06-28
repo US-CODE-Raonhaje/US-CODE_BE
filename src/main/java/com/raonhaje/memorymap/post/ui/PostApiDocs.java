@@ -23,8 +23,8 @@ public interface PostApiDocs {
             @ApiResponse(responseCode = "400", description = "잘못된 요청"),
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
-    @PostMapping("/posts")
-    ResponseEntity<Void> createPost(@RequestBody PostCreateRequest postRequest);
+    @PostMapping
+    ResponseEntity<Long> createPost(@RequestHeader(name = "Authorization") String authorizationHeader, @RequestBody PostCreateRequest postRequest);
 
     @Operation(summary = "게시글 수정", description = "기존 게시글을 수정합니다.", security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses({
@@ -33,8 +33,8 @@ public interface PostApiDocs {
             @ApiResponse(responseCode = "400", description = "잘못된 요청"),
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
-    @PutMapping("/posts/{id}")
-    ResponseEntity<Void> updatePost(@PathVariable Long id, @RequestBody PostUpdateRequest postRequest);
+    @PutMapping("/{id}")
+    ResponseEntity<Void> updatePost(@RequestHeader(name = "Authorization") String authorizationHeader, @PathVariable Long id, @RequestBody PostUpdateRequest postRequest);
 
     @Operation(summary = "게시글 삭제", description = "기존 게시글을 삭제합니다.", security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses({
@@ -42,8 +42,8 @@ public interface PostApiDocs {
             @ApiResponse(responseCode = "404", description = "게시글 없음"),
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
-    @DeleteMapping("/posts/{id}")
-    ResponseEntity<Void> deletePost(@PathVariable Long id);
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deletePost(@RequestHeader(name = "Authorization") String authorizationHeader, @PathVariable Long id);
 
     @Operation(summary = "게시글 단건 조회", description = "ID를 기반으로 게시글을 조회합니다.", security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses({
@@ -52,8 +52,8 @@ public interface PostApiDocs {
             @ApiResponse(responseCode = "404", description = "게시글 없음"),
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
-    @GetMapping("/posts/{id}")
-    ResponseEntity<PostResponse> getPost(@PathVariable Long id);
+    @GetMapping("/{id}")
+    ResponseEntity<PostResponse> getPost(@RequestHeader(name = "Authorization") String authorizationHeader, @PathVariable Long id);
 
     @Operation(summary = "회원의 게시글 목록 조회", description = "특정 회원이 작성한 게시글 목록을 조회합니다.", security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses({
@@ -61,6 +61,6 @@ public interface PostApiDocs {
                     content = @Content(schema = @Schema(implementation = PostListResponse.class))),
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
-    @GetMapping("/members/{memberId}/posts")
-    ResponseEntity<PostListResponse> getPostsByMember(@PathVariable Long memberId);
+    @GetMapping("/list")
+    ResponseEntity<PostListResponse> getPostsByMember(@RequestHeader(name = "Authorization") String authorizationHeader);
 }
