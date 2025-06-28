@@ -24,6 +24,18 @@ spec:
               value: "${DB_USERNAME}"
             - name: DB_PASSWORD
               value: "${DB_PASSWORD}"
+            - name: CLIENT_ID
+              value: "${CLIENT_ID}"
+            - name: CLIENT_SECRET
+              value: "${CLIENT_SECRET}"
+            - name: REDIRECT_URI
+              value: "${REDIRECT_URI}"
+            - name: JWT_SECRET
+              value: "${JWT_SECRET}"
+            - name: ACCESS_TOKEN_EXPIRATION_MS
+              value: "${ACCESS_TOKEN_EXPIRATION_MS}"
+            - name: REFRESH_TOKEN_EXPIRATION_MS
+              value: "${REFRESH_TOKEN_EXPIRATION_MS}"
 ---
 apiVersion: v1
 kind: Service
