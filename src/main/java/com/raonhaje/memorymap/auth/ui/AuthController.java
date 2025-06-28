@@ -44,7 +44,7 @@ public class AuthController implements AuthApiDocs {
 
         boolean isAdditionalInfoRequired = member.isAdditionalInfoRequired();
 
-        String redirectUri = "https://your-frontend.com/oauth/callback"
+        String redirectUri = "http://localhost:5173/kakao-redirect"
                 + "?accessToken=" + accessToken
                 + "&refreshToken=" + refreshToken
                 + "&isAdditionalInfoRequired=" + isAdditionalInfoRequired;
