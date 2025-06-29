@@ -18,18 +18,21 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            # DB 환경 변수
             - name: DB_URL
               value: "${DB_URL}"
             - name: DB_USERNAME
               value: "${DB_USERNAME}"
             - name: DB_PASSWORD
               value: "${DB_PASSWORD}"
+            # OAuth2 환경 변수
             - name: CLIENT_ID
               value: "${CLIENT_ID}"
             - name: CLIENT_SECRET
               value: "${CLIENT_SECRET}"
             - name: REDIRECT_URI
               value: "${REDIRECT_URI}"
+            # JWT 환경 변수
             - name: JWT_SECRET
               value: "${JWT_SECRET}"
             - name: ACCESS_TOKEN_EXPIRATION_MS
