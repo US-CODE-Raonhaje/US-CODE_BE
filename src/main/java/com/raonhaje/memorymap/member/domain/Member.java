@@ -31,9 +31,9 @@ public class Member extends BaseEntity {
     @Column(unique = true)
     private String nickname;
 
-    private String imageUrl;
-
     private Integer age;
+
+    private String imageUrl;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Likes> likes = new ArrayList<>();
@@ -44,21 +44,26 @@ public class Member extends BaseEntity {
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Location location;
 
-    private boolean additionalInfoRequired = true;
-
-    public static Member create(String email, String nickname, Integer age) {
-        return Member.builder()
-                .email(email)
-                .nickname(nickname)
-                .age(age)
-                .build();
-    }
+    private boolean additionalInfoRequired;
 
     public static Member create(String email, String name) {
         return Member.builder()
                 .email(email)
                 .name(name)
+                .additionalInfoRequired(true)
                 .build();
+    }
+
+    public void isAdditionalInfoRequired() {
+        this.additionalInfoRequired = false;
+    }
+
+    public void setAdditionalInfo(String nickname, Integer age, String imageUrl, Location location) {
+        this.nickname = nickname;
+        this.age = age;
+        this.imageUrl = imageUrl;
+        this.location = location;
+        this.isAdditionalInfoRequired();
     }
 
     public void updateMember(String nickname, String imageUrl) {

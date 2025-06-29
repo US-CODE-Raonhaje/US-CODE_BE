@@ -15,6 +15,9 @@ public enum ErrorCode {
     // Post 관련 에러 코드
     POST_NOT_FOUND("존재하지 않는 게시물입니다.", HttpStatus.NOT_FOUND.value()),
 
+    // Token 관련 에러 코드
+    TOKEN_NOT_FOUND("토큰이 존재하지 않습니다.", HttpStatus.UNAUTHORIZED.value()),
+
     // 인증 관련 에러 코드
     UNAUTHORIZED("권한이 없는 요청입니다.", HttpStatus.UNAUTHORIZED.value()),
 
