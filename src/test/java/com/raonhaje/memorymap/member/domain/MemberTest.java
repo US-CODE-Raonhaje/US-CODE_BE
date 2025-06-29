@@ -12,23 +12,21 @@ class MemberTest {
     void createMemberTest() {
         // given
         String email = "testEmail@gmail.com";
-        String nickname = "testNickname";
-        Integer age = 25;
+        String name = "testname";
 
         // when
-        Member member = Member.create(email, nickname, age);
+        Member member = Member.create(email, name);
 
         // then
         assertEquals(email, member.getEmail());
-        assertEquals("testNickname", member.getNickname());
-        assertEquals(25, member.getAge());
+        assertEquals(name, member.getName());
     }
 
     @Test
     @DisplayName("Member 업데이트 테스트")
     void updateMemberTest() {
         // given
-        Member member = Member.create("testEmail@gmail.com", "testNickname", 25);
+        Member member = Member.create("testEmail@gmail.com", "testNickname");
         String newNickname = "updatedNickname";
         String newImageUrl = "http://example.com/image.jpg";
 
