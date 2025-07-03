@@ -75,6 +75,7 @@ Spring Boot 기반의 백엔드 프로젝트로, 사용자 인증, 데이터베�
 
 ## 🧱 아키텍처 개요
 
-![CI/CD 구조도](<img width="1496" alt="Map-of-memory-CICD 파이프라인" src="https://github.com/user-attachments/assets/c9f6ebae-2699-460f-b935-b919961c9c14" />)
+### CI/CD 구조도
+<img width="1496" alt="Map-of-memory-CICD 파이프라인" src="https://github.com/user-attachments/assets/a018188c-940b-419b-af80-affe2171645c" />
 
 ---
