@@ -1,7 +1,5 @@
 package com.raonhaje.memorymap.common.config;
 
-import com.raonhaje.memorymap.auth.application.CustomOAuth2UserService;
-import com.raonhaje.memorymap.auth.handler.OAuth2SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final CustomOAuth2UserService customOAuth2UserService;
-    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+//    private final CustomOAuth2UserService customOAuth2UserService;
+//    private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,14 +36,14 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**"
                         ).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() // TODO: API 개발 완료 후, authenticated()로 변경
                 )
-                .oauth2Login(oauth2 -> oauth2
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService)
-                        )
-                        .successHandler(oAuth2SuccessHandler)
-                );
+//                .oauth2Login(oauth2 -> oauth2
+//                        .userInfoEndpoint(userInfo -> userInfo
+//                                .userService(customOAuth2UserService)
+//                        )
+//                        .successHandler(oAuth2SuccessHandler)
+                ;
         return http.build();
     }
 
