@@ -26,7 +26,7 @@ public class MemberApiController implements MemberApiDocs {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Long> signUp(@RequestBody MemberSignUpRequest request) {
         Long memberId = memberService.signUp(request).getMemberId();
-        return ResponseEntity.ok(memberId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(memberId);
     }
 
     @Override
