@@ -13,8 +13,8 @@ import java.util.List;
 @Table(name = "member")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString(of = { "email", "name", "nickname", "age", "imageUrl" })
 public class Member extends BaseEntity {
 
     @Id
@@ -35,35 +35,27 @@ public class Member extends BaseEntity {
 
     private String imageUrl;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Likes> likes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
-    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "location_id")
     private Location location;
 
-    private boolean additionalInfoRequired;
-
-    public static Member create(String email, String name) {
-        return Member.builder()
-                .email(email)
-                .name(name)
-                .additionalInfoRequired(true)
-                .build();
-    }
-
-    public void isAdditionalInfoRequired() {
-        this.additionalInfoRequired = false;
-    }
-
-    public void setAdditionalInfo(String nickname, Integer age, String imageUrl, Location location) {
+    private Member(String email, String name, String nickname, Integer age, String imageUrl, Location location) {
+        this.email = email;
+        this.name = name;
         this.nickname = nickname;
         this.age = age;
         this.imageUrl = imageUrl;
         this.location = location;
-        this.isAdditionalInfoRequired();
+    }
+
+    public static Member create(String email, String name, String nickname, Integer age, String imageUrl, Location location) {
+        return new Member(email, name, nickname, age, imageUrl, location);
     }
 
     public void updateMember(String nickname, String imageUrl) {

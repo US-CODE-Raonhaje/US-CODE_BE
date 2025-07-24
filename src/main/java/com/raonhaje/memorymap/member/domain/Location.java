@@ -7,8 +7,8 @@ import lombok.*;
 @Table(name = "location")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString(of = { "latitude", "longitude", "address" })
 public class Location {
 
     @Id
@@ -20,16 +20,8 @@ public class Location {
 
     private String address;
 
-    @OneToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
-
     public static Location create(Double latitude, Double longitude, String address) {
-        return Location.builder()
-                .latitude(latitude)
-                .longitude(longitude)
-                .address(address)
-                .build();
+        return new Location(null, latitude, longitude, address);
     }
 
     public void updateLocation(Double latitude, Double longitude, String address) {

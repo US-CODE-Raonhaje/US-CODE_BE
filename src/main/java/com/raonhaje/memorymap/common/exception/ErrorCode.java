@@ -11,6 +11,8 @@ public enum ErrorCode {
     // Member 관련 에러 코드
     MEMBER_NOT_FOUND("회원이 존재하지 않습니다.", HttpStatus.NOT_FOUND.value()),
     EXISTING_MEMBER("이미 존재하는 회원입니다.", HttpStatus.BAD_REQUEST.value()),
+    EXISTING_EMAIL("이미 존재하는 이메일입니다.", HttpStatus.BAD_REQUEST.value()),
+    EXISTING_NICKNAME("이미 존재하는 닉네임입니다.", HttpStatus.BAD_REQUEST.value()),
 
     // Post 관련 에러 코드
     POST_NOT_FOUND("존재하지 않는 게시물입니다.", HttpStatus.NOT_FOUND.value()),

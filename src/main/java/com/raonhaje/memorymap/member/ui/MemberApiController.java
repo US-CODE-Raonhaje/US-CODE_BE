@@ -1,16 +1,16 @@
 package com.raonhaje.memorymap.member.ui;
 
+import com.raonhaje.memorymap.common.exception.BusinessException;
+import com.raonhaje.memorymap.common.exception.ErrorCode;
 import com.raonhaje.memorymap.common.jwt.JwtProvider;
 import com.raonhaje.memorymap.member.application.MemberService;
 import com.raonhaje.memorymap.member.dto.MemberInfoResponse;
 import com.raonhaje.memorymap.member.dto.MemberSignUpRequest;
+import com.raonhaje.memorymap.member.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/members")
@@ -18,21 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberApiController implements MemberApiDocs {
 
     private final MemberService memberService;
+    private final MemberJpaRepository memberJpaRepository;
     private final JwtProvider jwtProvider;
 
     @Override
-    public ResponseEntity<MemberInfoResponse> getMyInfo(@RequestHeader(name = "Authorization") String authorizationHeader) {
-        String email = jwtProvider.getEmailFromToken(authorizationHeader);
-        MemberInfoResponse memberInfo = memberService.getMemberInfo(email);
-
-        return ResponseEntity.ok(memberInfo);
+    @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Long> signUp(@RequestBody MemberSignUpRequest request) {
+        Long memberId = memberService.signUp(request).getMemberId();
+        return ResponseEntity.status(HttpStatus.CREATED).body(memberId);
     }
 
     @Override
-    public ResponseEntity<Long> signUp(@RequestHeader(name = "Authorization") String authorizationHeader, @RequestBody MemberSignUpRequest request) {
+    @GetMapping("/me")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<MemberInfoResponse> getMyInfo(@RequestHeader(name = "Authorization") String authorizationHeader) {
         String email = jwtProvider.getEmailFromToken(authorizationHeader);
-        Long memberId = memberService.signUp(email, request).getMemberId();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(memberId);
+        MemberInfoResponse memberInfo = memberJpaRepository.findByEmail(email)
+                .map(MemberInfoResponse::from)
+                .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
+
+        return ResponseEntity.ok(memberInfo);
     }
 }

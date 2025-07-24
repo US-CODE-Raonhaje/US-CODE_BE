@@ -13,7 +13,7 @@ class LikeTest {
     @DisplayName("Like 생성 테스트")
     void createLikeTest() {
         // given
-        Member member = Member.create("testEmail@gmail.com", "testNickname");
+        Member member = Member.create("testEmail@gmail.com", "testName", "testNickname", 25, "testImageUrl", null);
         Post post = Post.create("Test Title", "Test Content");
 
         // when
