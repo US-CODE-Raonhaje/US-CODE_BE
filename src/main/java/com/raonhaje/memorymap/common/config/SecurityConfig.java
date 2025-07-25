@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -34,16 +35,21 @@ public class SecurityConfig {
                                 "/v2/api-docs/**",
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
-                                "/webjars/**"
+                                "/webjars/**",
+                                "/h2-console/**",
+                                "/api/**" // TODO: API 개발 완료 후, 이 경로를 제거하거나 수정해야 합니다.
                         ).permitAll()
-                        .anyRequest().permitAll() // TODO: API 개발 완료 후, authenticated()로 변경
+                        .anyRequest().authenticated()
                 )
+                .headers( headers ->
+                    headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+                );
 //                .oauth2Login(oauth2 -> oauth2
 //                        .userInfoEndpoint(userInfo -> userInfo
 //                                .userService(customOAuth2UserService)
 //                        )
 //                        .successHandler(oAuth2SuccessHandler)
-                ;
+
         return http.build();
     }
 
