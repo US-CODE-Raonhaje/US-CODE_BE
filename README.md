@@ -1,11 +1,12 @@
 # 📍 Map of memory Backend
 
 > 기간: 2025.06.27 ~ 06.29
+> 
 > 장소: 경상북도 의성군
+> 
 > 주최/후원: 메이드인피플 (후원: 의성군, Google Developers)
+> 
 > 팀명: 라온하제(Raonhaje)
-> 역할: 백엔드 파트 개발
-> **Backend Repository:** https://github.com/US-CODE-Raonhaje/US-CODE_BE
 
 ---
 
