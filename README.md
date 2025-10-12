@@ -54,7 +54,6 @@
 
 ## 🧱 CI/CD 구성도.
 
-### CI/CD 구조도
 <img width="1496" alt="Map-of-memory-CICD 파이프라인" src="https://github.com/user-attachments/assets/a018188c-940b-419b-af80-affe2171645c" />
 
 ---
