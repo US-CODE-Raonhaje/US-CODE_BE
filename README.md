@@ -1,19 +1,31 @@
 # 📍 Map of memory Backend
 
+> 기간: 2025.06.27 ~ 06.29
+> 장소: 경상북도 의성군
+> 주최/후원: 메이드인피플 (후원: 의성군, Google Developers)
+> 팀명: 라온하제(Raonhaje)
+> 역할: 백엔드 파트 개발
+> **Backend Repository:** https://github.com/US-CODE-Raonhaje/US-CODE_BE
+
 ---
 
-## 🛠️ Tech Stack
+## **프로젝트 개요**
 
-| 분류            | 기술 스택                                                                                            |
-|----------------|----------------------------------------------------------------------------------------------------|
-| **Framework**  | Spring Boot 3.x, Spring MVC, Spring Validation                                                    |
-| **Security**   | Spring Security, OAuth2 Client, JWT                                                               |
-| **ORM / DB**   | Spring Data JPA, QueryDSL (v5, Jakarta), MySQL                                                    |
-| **Build Tool** | Gradle                                                                                            |
-| **Docs**       | SpringDoc OpenAPI 3 (Swagger UI v3 기반)                                                           |
-| **Testing**    | JUnit 5, Spring Security Test, Spring Boot Test                                                   |
-| **Annotation** | Lombok, Jakarta Annotations (for APT)                                                             |
-| **Dev Tools**  | IntelliJ IDEA, Git, GitHub Actions                                                                |
+- 주제: **기억을 시각적으로 저장하고 연결하는 지도 (Map-of-Memory)**
+- 기술 스택: Spring Boot · JPA · Docker · GCP(GKE, Cloud SQL, Storage)
+- CI/CD: GitHub Actions → Artifact Registry → GKE 자동 배포 파이프라인 구축
+- 목표: 해커톤 내에서 **GCP 기반 자동 배포 환경 구축 및 서비스 개발**
+
+---
+
+## **주요 구현 사항**
+
+- **GitHub Actions CI/CD 구축**
+    - main 브랜치 병합 시 자동 빌드, 도커 이미지 푸시 및 GKE 배포 자동화
+    - Cloud SQL 및 Storage 연동 테스트 완료
+- **GCP 인프라 구성**
+    - Artifact Registry 이미지 관리
+    - GKE 기반 컨테이너 오케스트레이션
 
 ---
 
@@ -39,7 +51,7 @@
 ```
 ---
 
-## 🧱 아키텍처 개요
+## 🧱 CI/CD 구성도.
 
 ### CI/CD 구조도
 <img width="1496" alt="Map-of-memory-CICD 파이프라인" src="https://github.com/user-attachments/assets/a018188c-940b-419b-af80-affe2171645c" />
